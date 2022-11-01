@@ -29,12 +29,19 @@ jobs:
   build:
     needs: test
     runs-on: ubunty-latest
+    output: 
+      script-file: ${{ steps.publish.outputs.script-file }}
     steps:
       - name: Get code
         uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
       - name: Build website
+        run: npm run build
+      - name: Publish JS filename
+        id: publish
+        run: find dist/assets/*.js -type f -execdir echo '::set-output name=script-file::{}' ';'
+      - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: dist-files
