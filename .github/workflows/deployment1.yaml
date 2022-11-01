@@ -56,8 +56,8 @@ jobs:
           name: dist-files
       - name: Output content
         run: ls -la
-      - name: Install dependecies
-        run: npm ci
+      - name: Output filename
+        run: echo "${{ needs.build.outputs.script-file }}"
       - name: Deploy code
         run: echo "Deploying..."
       
