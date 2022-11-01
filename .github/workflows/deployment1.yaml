@@ -45,12 +45,12 @@ jobs:
         run: npm run build
       - name: Publish JS filename
         id: publish
-        run: find build/static/*.js -type f -execdir echo '::set-output name=script-file::{}' ';'
+        run: find build/static/js/*.js -type f -execdir echo '::set-output name=script-file::{}' ';'
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: dist-files
-          path: build/static
+          path: build/static/js
   deploy:
     needs: build
     runs-on: ubuntu-latest
