@@ -1,7 +1,5 @@
-<<<<<<< Updated upstream
 name: D eployment 1
 on: push
-=======
 name: Deployment 1
 on: 
   pull_request:
@@ -20,7 +18,6 @@ on:
     path-ignore:
       - '.github/workflows/*'
   workflow_dispatch:
->>>>>>> Stashed changes
 jobs:
   deploy:
     runs-on: ubuntu-latest
