@@ -17,21 +17,17 @@ on:
       - '.github/workflows/*'
   workflow_dispatch:
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
-    steps:
+    stets:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Install dependecies
+      - name: Install dependencies
         run: npm ci
-      - name: Test code
+      - name: Run tests
         run: npm run test
-      - name: Build code
-        run: npm run build
-      - name: Deploy code
-        run: echo "Deploying..."
   build:
-    needs: deploy
+    needs: test
     runs-on: ubunty-latest
     steps:
       - name: Get code
@@ -42,7 +38,19 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: dist-files
-          path: |
-            dist
-            package.json
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with: 
+          name: dist-files
+      - name: Output content
+        run: ls -la
+      - name: Install dependecies
+        run: npm ci
+      - name: Deploy code
+        run: echo "Deploying..."
       
