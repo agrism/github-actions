@@ -1,5 +1,26 @@
+<<<<<<< Updated upstream
 name: D eployment 1
 on: push
+=======
+name: Deployment 1
+on: 
+  pull_request:
+    types: 
+      - opened
+    branches:
+      - main # main
+      - dev-* # dev-new dev-this-is-new
+      - feat/** # feat/new feat/new/button
+  push: 
+    branches:
+      - main # main
+      - dev-* # dev-new dev-this-is-new
+      - feat/** # feat/new feat/new/button
+      # developer-1
+    path-ignore:
+      - '.github/workflows/*'
+  workflow_dispatch:
+>>>>>>> Stashed changes
 jobs:
   deploy:
     runs-on: ubuntu-latest
