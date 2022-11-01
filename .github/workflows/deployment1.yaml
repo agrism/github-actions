@@ -19,7 +19,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    stets:
+    steps:
       - name: Get code
         uses: actions/checkout@v3
       - name: Install dependencies
